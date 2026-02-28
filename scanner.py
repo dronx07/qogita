@@ -73,7 +73,7 @@ async def process_product(product, semaphore, amazon_cookie, seller_cookie, db, 
             price_data = await sc.get_price()
             if not price_data:
                 logger.warning(f"Failed to get price for ASIN/EAN: {asin}/{ean}.")
-                    return
+                return
 
             price = price_data
 
