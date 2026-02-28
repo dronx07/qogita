@@ -54,5 +54,5 @@ async def main():
     logger.info("Finished hourly run")
 
 
-#if __name__ == "__main__":
-#    asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
