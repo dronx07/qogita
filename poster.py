@@ -21,7 +21,7 @@ with open("data/deals.json", "r", encoding="utf-8") as f:
 
 MAX_POSTS_PER_RUN = math.ceil(total/24)
 MIN_DELAY = 15
-MAX_DELAY = 60
+MAX_DELAY = 45
 
 async def main():
     if not WEBHOOK_URL:
