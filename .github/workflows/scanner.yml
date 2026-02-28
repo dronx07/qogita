@@ -2,7 +2,7 @@ name: FBA Scanner
 
 on:
   schedule:
-    - cron: '0 8 * * *'   # Runs daily at 08:00 UTC
+    - cron: '0 8 * * *' 
   workflow_dispatch:
 
 permissions:
