@@ -7,6 +7,8 @@ from core.database import Database
 from core.discord_sender import DiscordSender
 from core.logger import get_logger
 from dotenv import load_dotenv
+import json
+import math
 
 load_dotenv()
 
@@ -14,17 +16,20 @@ logger = get_logger("Poster")
 
 WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK")
 
-MAX_POSTS_PER_RUN = 25
-MIN_DELAY = 5
-MAX_DELAY = 15
+with open("data/deals.json", "r", encoding="utf-8") as f:
+    total = len(json.loads(f.read()))
 
+MAX_POSTS_PER_RUN = math.ceil(total/24)
+MIN_DELAY = 15
+MAX_DELAY = 60
 
 async def main():
     if not WEBHOOK_URL:
         logger.error("DISCORD_WEBHOOK not set.")
         return
 
-    logger.info("Starting hourly poster run")
+    logger.info("Starting hourly poster run.")
+    logger.info(f"Posting {MAX_POSTS_PER_RUN} deals.")
 
     db = Database()
     sender = DiscordSender(WEBHOOK_URL)
@@ -49,6 +54,7 @@ async def main():
             logger.exception(f"Failed ASIN {deal.get('asin')} - {e}")
 
         delay = random.uniform(MIN_DELAY, MAX_DELAY)
+        logger.info(f"Waiting {delay}s before posting next deal.")
         await asyncio.sleep(delay)
 
     logger.info("Finished hourly run")
