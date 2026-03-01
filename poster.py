@@ -29,7 +29,6 @@ async def main():
         return
 
     logger.info("Starting hourly poster run.")
-    logger.info(f"Posting {MAX_POSTS_PER_RUN} deals.")
 
     db = Database()
     sender = DiscordSender(WEBHOOK_URL)
