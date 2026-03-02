@@ -73,3 +73,8 @@ class Database:
 
         await self._write_all(deals)
         logger.info(f"Marked ASIN {asin} as posted.")
+
+    async def reset_db(self):
+        with open(DB_PATH, "w", encoding="utf-8") as f:
+                json.dump([], f)
+        
