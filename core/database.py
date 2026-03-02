@@ -15,9 +15,8 @@ class Database:
     def __init__(self):
         os.makedirs("data", exist_ok=True)
 
-        if not os.path.exists(DB_PATH):
-            with open(DB_PATH, "w", encoding="utf-8") as f:
-                json.dump([], f)
+        with open(DB_PATH, "w", encoding="utf-8") as f:
+            json.dump([], f)
 
         self._lock = asyncio.Lock()
 
