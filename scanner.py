@@ -131,6 +131,7 @@ async def main():
     products = await fetch_products()
     amazon_cookie, seller_cookie, sas_cookie = await fetch_cookies()
     db = Database()
+    await db.reset_db()
 
     if not products:
         logger.error("No products fetched. Exiting.")
