@@ -41,7 +41,7 @@ class Requester:
         if self.session:
             await self.session.close()
 
-    async def fetch_get(self, retries: int = 3, delay: float = 1.0):
+    async def fetch_get(self, retries: int = 1, delay: float = 1.0):
         for attempt in range(1, retries + 1):
             try:
                 response = await self.session.get(self.url)
@@ -54,7 +54,7 @@ class Requester:
         logger.error(f"GET request failed after {retries} attempts for URL {self.url}")
         return None
 
-    async def fetch_post(self, data: dict, retries: int = 3, delay: float = 1.0):
+    async def fetch_post(self, data: dict, retries: int = 1, delay: float = 1.0):
         for attempt in range(1, retries + 1):
             try:
                 response = await self.session.post(self.url, json=data)
