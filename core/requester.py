@@ -5,9 +5,6 @@ import os
 import asyncio
 from dotenv import load_dotenv
 from curl_cffi.requests import AsyncSession
-from .logger import get_logger
-
-logger = get_logger("Requester")
 
 
 class Requester:
@@ -48,10 +45,8 @@ class Requester:
                 response.raise_for_status()
                 return response
             except Exception as e:
-                logger.warning(f"GET request failed (attempt {attempt}/{retries}) for URL {self.url}: {e}")
                 if attempt < retries:
                     await asyncio.sleep(delay)
-        logger.error(f"GET request failed after {retries} attempts for URL {self.url}")
         return None
 
     async def fetch_post(self, data: dict, retries: int = 1, delay: float = 1.0):
@@ -61,8 +56,6 @@ class Requester:
                 response.raise_for_status()
                 return response
             except Exception as e:
-                logger.warning(f"POST request failed (attempt {attempt}/{retries}) for URL {self.url}: {e}")
                 if attempt < retries:
                     await asyncio.sleep(delay)
-        logger.error(f"POST request failed after {retries} attempts for URL {self.url}")
         return None
