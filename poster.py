@@ -19,7 +19,7 @@ WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK")
 with open("data/deals.json", "r", encoding="utf-8") as f:
     total = len(json.loads(f.read()))
 
-MAX_POSTS_PER_RUN = math.ceil(total/5) if total > 20 else total
+MAX_POSTS_PER_RUN = math.ceil(total/5) if total > 50 else total
 MIN_DELAY = 15
 MAX_DELAY = 30
 
